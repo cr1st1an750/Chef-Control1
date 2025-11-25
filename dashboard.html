@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChefControl - Gestión de Pedidos</title>
+    <link rel="stylesheet" href="styledashboard.css"/>
+</head>
+<body>
+  <aside class="sidebar">
+    <h2>ChefControl</h2>
+    <nav>
+      <a href="#" class="active">Pedidos</a>
+      <a href="#">Menú</a>
+      <a href="#">Clientes</a>
+      <a href="#">Informes</a>
+      <a href="#">Configuración</a>
+    </nav>
+    <div class="summary">
+      <h4>Resumen del Día</h4>
+      <div id="resumen-total">Pedidos totales: <strong>0</strong></div>
+      <div id="resumen-pendientes">Pendientes: <strong style="color: orange">0</strong></div>
+      <div id="resumen-completados">Completados: <strong style="color: green">0</strong></div>
+      <div id="resumen-ingresos">Ingresos: <strong>$0.00</strong></div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="main-header">
+      <h1>Gestión de Pedidos</h1>
+      <button onclick="mostrarFormulario()">+ Nuevo Pedido</button>
+    </div>
+    <div class="tabs">
+      <button class="active" onclick="filtrarPedidos('Todos', this)">Todos</button>
+      <button onclick="filtrarPedidos('Pendiente', this)">Pendientes</button>
+      <button onclick="filtrarPedidos('Preparacion', this)">En preparación</button>
+      <button onclick="filtrarPedidos('Listo', this)">Listos</button>
+      <button onclick="filtrarPedidos('Entregado', this)">Entregados</button>
+      <button onclick="filtrarPedidos('Cancelado', this)">Cancelados</button>
+    </div>
+    <div class="content">
+      <div class="orders" id="orders"></div>
+      <div id="nuevo-pedido" class="add-order">
+        <span class="close" onclick="cerrarFormulario()">&times;</span>
+        <h3>Agregar Pedido</h3>
+        <input type="text" id="mesa" placeholder="Número de mesa" />
+        <input type="text" id="cliente" placeholder="Nombre del cliente" />
+        <input type="text" id="hora" placeholder="Hora (ej: 14:30)" />
+        <input type="text" id="articulos" placeholder="Artículos (ej: Pizza x1, Refresco x2)" />
+        <input type="text" id="total" placeholder="Total (ej: 25.50)" />
+        <select id="estado">
+          <option value="Pendiente">Pendiente</option>
+          <option value="Preparacion">En preparación</option>
+          <option value="Listo">Listo</option>
+          <option value="Entregado">Entregado</option>
+          <option value="Cancelado">Cancelado</option>
+        </select>
+        <button onclick="agregarPedido()">Guardar Pedido</button>
+      </div>
+    </div>
+  </main>
+  <script>
+    let pedidos = [];
+    let editandoIndex = null;
+
+    function mostrarFormulario(editar = false) {
+      document.getElementById('nuevo-pedido').classList.add('active');
+    }
+
+    function cerrarFormulario() {
+      document.getElementById('nuevo-pedido').classList.remove('active');
+      editandoIndex = null;
+      document.querySelectorAll('.add-order input, .add-order select').forEach(i => i.value = '');
+    }
+
+    function actualizarResumen() {
+      document.getElementById("resumen-total").innerHTML = `Pedidos totales: <strong>${pedidos.length}</strong>`;
+      document.getElementById("resumen-pendientes").innerHTML = `Pendientes: <strong style="color: orange">${pedidos.filter(p => p.estado === 'Pendiente').length}</strong>`;
+      document.getElementById("resumen-completados").innerHTML = `Completados: <strong style="color: green">${pedidos.filter(p => ['Entregado', 'Listo'].includes(p.estado)).length}</strong>`;
+      const ingresos = pedidos.reduce((sum, p) => {
+        const normalizado = p.total.replace(/\./g, '').replace(',', '.');
+        return sum + parseFloat(normalizado);
+      }, 0);
+      document.getElementById("resumen-ingresos").innerHTML =
+  `Ingresos: <strong>$${ingresos.toLocaleString('es-ES', { minimumFractionDigits: 0, maximumFractionDigits: 6 })}</strong> <br> <span style="font-size:14px;color:#888;">(${pedidos.length} pedidos sumados)</span>`;
+    }
+
+    function renderPedidos() {
+      const container = document.getElementById('orders');
+      container.innerHTML = '';
+      pedidos.forEach((p, i) => {
+        const div = document.createElement('div');
+        div.className = 'order';
+        div.setAttribute('data-estado', p.estado);
+        div.innerHTML = `
+          <h3>Mesa ${p.mesa} <span class="status ${p.estado}">${p.estado}</span></h3>
+          <p>Hora: ${p.hora}</p>
+          <p>Cliente: ${p.cliente}</p>
+          <ul>${p.articulos.map(i => `<li>${i}</li>`).join('')}</ul>
+          <strong>Total: $${p.total}</strong>
+          <div class="order-buttons">
+            <button class="edit-btn" onclick="editarPedido(${i})">Editar</button>
+            <button class="delete-btn" onclick="eliminarPedido(${i})">Eliminar</button>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+      actualizarResumen();
+    }
+
+    function agregarPedido() {
+      const mesa = document.getElementById('mesa').value;
+      const cliente = document.getElementById('cliente').value;
+      const hora = document.getElementById('hora').value;
+      const articulos = document.getElementById('articulos').value.split(',').map(i => i.trim());
+      const total = document.getElementById('total').value;
+      const estado = document.getElementById('estado').value;
+      if (!mesa || !cliente || !hora || articulos.length === 0 || !total || !estado) return alert("Completa todos los campos");
+
+      const nuevoPedido = { mesa, cliente, hora, articulos, total, estado };
+
+      if (editandoIndex !== null) {
+        pedidos[editandoIndex] = nuevoPedido;
+        editandoIndex = null;
+      } else {
+        pedidos.push(nuevoPedido);
+      }
+
+      cerrarFormulario();
+      renderPedidos();
+    }
+
+    function editarPedido(index) {
+      const pedido = pedidos[index];
+      document.getElementById('mesa').value = pedido.mesa;
+      document.getElementById('cliente').value = pedido.cliente;
+      document.getElementById('hora').value = pedido.hora;
+      document.getElementById('articulos').value = pedido.articulos.join(', ');
+      document.getElementById('total').value = pedido.total;
+      document.getElementById('estado').value = pedido.estado;
+      mostrarFormulario(true);
+      editandoIndex = index;
+    }
+
+    function eliminarPedido(index) {
+      if (confirm("¿Estás seguro de eliminar este pedido?")) {
+        pedidos.splice(index, 1);
+        renderPedidos();
+      }
+    }
+
+    function filtrarPedidos(estado, btn) {
+      document.querySelectorAll('.tabs button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const orders = document.querySelectorAll('.order');
+      orders.forEach(order => {
+        if (estado === 'Todos' || order.getAttribute('data-estado') === estado) {
+          order.style.display = 'block';
+        } else {
+          order.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
+
+
+
+
+
+

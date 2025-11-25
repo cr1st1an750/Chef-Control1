@@ -1,0 +1,228 @@
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #f3eaf0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center; /* Centra horizontalmente todo */
+  align-items: center;     /* Centra verticalmente todo */
+  min-height: 90vh;
+  width: 100vw;
+  margin: auto;
+  padding: 40px 0;
+  gap: 40px;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;   /* Logo pegado a la derecha del contenedor izquierdo */
+  justify-content: center;
+  width: auto;
+  padding-top: 0;
+  margin-right: 40px;      /* Espacio entre logo y menú */
+}
+
+.logo {
+  width: 360px;
+  max-width: 100%;
+  margin-bottom: 0;
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;     /* Centra el menú verticalmente */
+  justify-content: center; /* Centra el menú horizontalmente */
+  width: auto;
+  padding-right: 0;
+}
+
+.card {
+  background-color: #fdf3e7;
+  border-radius: 12px;
+  padding: 48px 40px;
+  width: 440px;
+  min-height: 540px;
+  box-shadow: 0 0 16px rgba(0,0,0,0.12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;     /* Centra el contenido de la card */
+  justify-content: center;
+  gap: 28px;
+  animation: fadeIn 0.8s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.card-title {
+  text-align: center;
+  font-size: 36px;
+  color: #333;
+  margin-bottom: 24px;
+  margin-top: 0;
+  width: 100%;
+  display: block;
+}
+
+.card-subtitle {
+  text-align: center;
+  font-size: 18px;
+  color: #161616;
+  margin-bottom: 16px;
+  margin-top: -12px;
+}
+.menu-group, .auth-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  font-size: 17px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  margin-bottom: 15px;
+}
+
+.btn:hover {
+  transform: scale(1.02);
+  background-color: #f0f0f0;
+}
+
+.login {
+  border-top: 2px solid #888;
+  border-bottom: none;
+}
+
+.register {
+  background: linear-gradient(to right, #f5c9e0, #b6c7f2);
+  color: #333;
+  border: none;
+}
+
+.divider {
+  height: 1px;
+  background: linear-gradient(to right, #999, #ccc);
+  margin: 10px 0;
+}
+
+.social {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.social i {
+  margin: 0 12px;
+  font-size: 22px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.social i.fa-facebook-f { color: #4267B2; }
+.social i.fa-instagram { color: #E1306C; }
+.social i.fa-twitter { color: #1DA1F2; }
+
+.social i:hover {
+  transform: scale(1.15);
+  filter: brightness(1.2);
+}
+
+/* Modal styles */
+.modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.modal-content {
+  background: #fff;
+  padding: 32px 24px;
+  border-radius: 16px;
+  min-width: 300px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+}
+.close {
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  font-size: 24px;
+  cursor: pointer;
+}
+.input {
+  width: 90%;
+  padding: 10px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+    width: 100vw;
+    padding: 20px 0;
+    gap: 0;
+  }
+  .left, .right {
+    width: 100%;
+    padding: 0;
+    text-align: center;
+  }
+  .right {
+    justify-content: center;
+    padding-right: 0;
+  }
+  .card {
+    width: 100%;
+    min-height: 400px;
+    padding: 20px;
+    gap: 18px;
+  }
+  .logo {
+    width: 180px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    padding: 10px;
+  }
+  .left, .right {
+    width: 100%;
+    text-align: center;
+  }
+  .card {
+    width: 100%;
+    padding: 20px;
+  }
+}
