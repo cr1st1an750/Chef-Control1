@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ChefControl — Gestión de Pedidos</title>
+  <link rel="stylesheet" href="pedidos.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">+ChefControl</div>
+      <nav class="nav">
+        <a href="pedidos.html" class="active"><span class="icon">🧾</span> Pedidos</a>
+        <a href="domicilios.html"><span class="icon">🚚</span> Domicilios</a>
+        <a href="clientes.html"><span class="icon">👥</span> Clientes</a>
+        <a href="#" class="disabled"><span class="icon">⚙️</span> Configuración</a>
+      </nav>
+
+      <div class="summary card">
+        <div class="small muted">RESUMEN DEL DÍA</div>
+        <div class="row"><div>Pedidos totales:</div><div class="bold" id="sumTotal">0</div></div>
+        <div class="row"><div>Pendientes:</div><div id="sumPending">0</div></div>
+        <div class="row"><div>Completados:</div><div id="sumDone">0</div></div>
+        <div class="row"><div>Ingresos:</div><div id="sumIncome">$0.00</div></div>
+      </div>
+
+      <div class="footer">ChefControl · Demo</div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <h1>Gestión de Pedidos</h1>
+          <div class="tabs" role="tablist" aria-label="Filtros de pedidos">
+            <button class="tab active" data-tab="all">Todos</button>
+            <button class="tab" data-tab="pendiente">Pendientes</button>
+            <button class="tab" data-tab="preparacion">En preparación</button>
+            <button class="tab" data-tab="listo">Listos</button>
+            <button class="tab" data-tab="entregado">Entregados</button>
+            <button class="tab" data-tab="cancelado">Cancelados</button>
+          </div>
+        </div>
+
+        <div class="right-controls">
+          <input id="searchOrders" placeholder="Buscar..." />
+          <button class="btn" id="btnNewOrder">+ Nuevo Pedido</button>
+          <div class="avatar">A</div>
+        </div>
+      </header>
+
+      <section class="cardsWrap">
+        <div id="ordersGrid" class="cardsGrid">
+          <!-- tarjetas generadas por JS -->
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Modal Nuevo Pedido -->
+  <div id="modalOrder" class="modal-back hidden" aria-hidden="true">
+    <div class="modal">
+      <h3>Nuevo Pedido</h3>
+      <label>Nombre cliente<input id="o_client" /></label>
+      <label>Mesa<input id="o_table" /></label>
+      <label>Hora<input id="o_time" type="time" /></label>
+      <label>Artículos (línea por artículo)<textarea id="o_items" rows="4" placeholder="Ej: Paella Valenciana x1"></textarea></label>
+      <label>Total<input id="o_total" type="number" step="0.01" /></label>
+      <label>Estado
+        <select id="o_state">
+          <option value="pendiente">Pendiente</option>
+          <option value="preparacion">En preparación</option>
+          <option value="listo">Listo</option>
+        </select>
+      </label>
+      <div class="modalActions">
+        <button class="btn secondary" id="orderCancel">Cancelar</button>
+        <button class="btn" id="orderSave">Guardar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="pedidos.js"></script>
+</body>
+</html>
