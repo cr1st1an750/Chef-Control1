@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ChefControl — Gestión de Domicilios</title>
+  <link rel="stylesheet" href="domicilios.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">+ChefControl</div>
+      <nav class="nav">
+        <a href="domicilios.html" class="active"><span class="icon">🏠</span> Domicilios</a>
+        <a href="clientes.html"><span class="icon">👥</span> Clientes</a>
+        <a href="#" class="disabled"><span class="icon">⚙️</span> Configuraciones</a>
+      </nav>
+      <div class="footer">ChefControl · Demo</div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="left-search">
+          <h1>Gestión de Domicilios</h1>
+        </div>
+        <div class="right-controls">
+          <input id="search" placeholder="Buscar..." />
+          <button class="btn" id="btnNew">+ Nuevo Domicilio</button>
+          <div class="avatar">A</div>
+        </div>
+      </header>
+
+      <section class="stats">
+        <div class="card stat">
+          <div class="title">Domicilios Totales</div>
+          <div class="value" id="statTotal">0</div>
+          <div class="note">▲ 8.2% vs semana anterior</div>
+        </div>
+        <div class="card stat">
+          <div class="title">En Tránsito</div>
+          <div class="value" id="statTransit">0</div>
+          <div class="progressWrap">
+            <div class="progressBar"><div id="progressFill"></div></div>
+          </div>
+        </div>
+        <div class="card stat">
+          <div class="title">Tiempo Promedio</div>
+          <div class="value">28 min</div>
+          <div class="note">▼ 2.4% más rápido que ayer</div>
+        </div>
+        <div class="card stat">
+          <div class="title">Satisfacción</div>
+          <div class="value">94%</div>
+          <div class="note small">Evaluaciones recientes</div>
+        </div>
+      </section>
+
+      <section class="contentColumns">
+        <div class="leftPanel card">
+          <div class="panelHeader">
+            <h3>Domicilios Activos <span class="muted" id="activeCount">0 en curso</span></h3>
+            <div class="filters">
+              <select id="filterStatus">
+                <option value="all">Todos los estados</option>
+                <option value="transito">En tránsito</option>
+                <option value="preparando">Preparando</option>
+                <option value="pendiente">Pendiente</option>
+              </select>
+            </div>
+          </div>
+          <div id="ordersList" class="orders"></div>
+        </div>
+
+        <aside class="rightPanel card">
+          <div class="panelHeader">
+            <h3>Personal de Reparto</h3>
+            <a class="muted small" id="viewAllStaff" href="#">Ver todos</a>
+          </div>
+          <div id="staffList" class="staff"></div>
+        </aside>
+      </section>
+    </main>
+  </div>
+
+  <!-- Modal Nuevo -->
+  <div id="modal" class="modal-back hidden" aria-hidden="true">
+    <div class="modal">
+      <h3>Nuevo Domicilio</h3>
+      <label>Dirección<input id="m_address" /></label>
+      <label>Cliente<input id="m_client" /></label>
+      <label>Repartidor<input id="m_driver" /></label>
+      <label>Estado
+        <select id="m_status">
+          <option value="pendiente">Pendiente</option>
+          <option value="preparando">Preparando</option>
+          <option value="transito">En tránsito</option>
+        </select>
+      </label>
+      <div class="modalActions">
+        <button class="btn secondary" id="modalCancel">Cancelar</button>
+        <button class="btn" id="modalSave">Guardar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="domicilios.js"></script>
+</body>
+</html>
