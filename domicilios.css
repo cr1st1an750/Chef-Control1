@@ -1,0 +1,75 @@
+:root{
+  --purple1:#4328a9; --purple2:#6c46e6; --bg:#f6f8fb; --card:#ffffff;
+  --muted:#8b97ab; --accent:#6c46e6; --success:#2ecc71; --danger:#ffb020;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter, system-ui, Arial, sans-serif;background:var(--bg);color:#223}
+.app{display:flex;min-height:100vh}
+
+/* SIDEBAR */
+.sidebar{width:220px;background:linear-gradient(180deg,var(--purple1),var(--purple2));color:#fff;padding:26px 18px;display:flex;flex-direction:column}
+.brand{font-weight:700;font-size:18px;margin-bottom:12px}
+.nav{display:flex;flex-direction:column;gap:8px}
+.nav a{display:flex;align-items:center;gap:10px;padding:10px;border-radius:10px;color:rgba(255,255,255,0.95);text-decoration:none}
+.nav a.active{background:rgba(255,255,255,0.08)}
+.nav a.disabled{opacity:0.6;pointer-events:none}
+.footer{margin-top:auto;font-size:12px;opacity:0.85}
+
+/* MAIN */
+.main{flex:1;padding:22px}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.topbar h1{margin:0;font-size:20px}
+.right-controls{display:flex;align-items:center;gap:12px}
+.right-controls input{padding:8px 12px;border-radius:20px;border:1px solid #e9eef6;min-width:220px}
+.avatar{width:36px;height:36px;border-radius:50%;background:#fff;color:var(--purple1);display:grid;place-items:center;font-weight:700}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
+.card{background:var(--card);border-radius:12px;padding:14px;box-shadow:0 6px 18px rgba(34,52,94,0.06);border:1px solid rgba(35,47,68,0.04)}
+.stat .title{font-size:13px;color:var(--muted)} .stat .value{font-weight:800;font-size:20px;margin-top:8px}
+.note{font-size:13px;color:green;margin-top:8px}
+.progressWrap{margin-top:10px}
+.progressBar{height:8px;background:#eef2ff;border-radius:8px;overflow:hidden}
+.progressBar > div{height:100%;background:linear-gradient(90deg,var(--accent),#8b63ff);width:10%}
+
+/* CONTENT COLUMNS */
+.contentColumns{display:grid;grid-template-columns:1fr 350px;gap:18px}
+.leftPanel{min-height:420px}
+.panelHeader{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.panelHeader h3{margin:0}
+.muted{color:var(--muted);font-size:13px}
+.filters select{padding:8px;border-radius:8px;border:1px solid #e6e9ef}
+
+/* ORDERS LIST */
+.orders{display:flex;flex-direction:column;gap:10px;max-height:620px;overflow:auto;padding-right:6px}
+.order{display:flex;gap:12px;align-items:flex-start;border-radius:10px;padding:12px;border:1px solid #eef2f8;background:#fbfdff}
+.order .left{width:44px;height:44px;border-radius:10px;background:#eef6ff;display:grid;place-items:center;font-weight:700;color:var(--purple1)}
+.order .meta{flex:1}
+.order .title{font-weight:700;margin-bottom:6px}
+.badge{display:inline-block;padding:6px 8px;border-radius:999px;font-size:12px;background:#e8f2ff;color:#1b3c9b}
+.badge.prep{background:#fff4e6;color:#b66900} .badge.pend{background:#fff7ee;color:#b66a00}
+.order small{color:var(--muted);display:block}
+
+/* STAFF */
+.staff{display:flex;flex-direction:column;gap:10px}
+.person{display:flex;align-items:center;gap:10px;padding:10px;border-radius:10px;background:#fbfdff;border:1px solid #eef2f8}
+.avatar-sm{width:36px;height:36px;border-radius:50%;background:#eef2ff;display:grid;place-items:center;color:var(--purple1);font-weight:700}
+.person .name{font-weight:700}
+
+/* BTN & MODAL */
+.btn{background:var(--accent);color:#fff;padding:8px 12px;border-radius:8px;border:none;cursor:pointer}
+.btn.secondary{background:#f3f5fb;color:var(--purple1);border:1px solid #e6e9ef}
+.modal-back{position:fixed;inset:0;background:rgba(6,12,28,0.45);display:flex;align-items:center;justify-content:center}
+.modal{background:#fff;padding:18px;border-radius:12px;min-width:320px;max-width:520px}
+.hidden{display:none}
+.modal label{display:block;margin-bottom:8px;font-size:13px}
+.modal input, .modal select{width:100%;padding:8px;border-radius:8px;border:1px solid #e6e9ef}
+
+/* small utilities */
+.small{font-size:12px}
+.orders::-webkit-scrollbar, .staff::-webkit-scrollbar{width:8px}
+.orders::-webkit-scrollbar-thumb{background:#e0e6f8;border-radius:8px}
+@media (max-width:1000px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .contentColumns{grid-template-columns:1fr}
+}
