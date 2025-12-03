@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ChefControl</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <div class="left">
+      <img src="logo.png" alt="ChefControl Logo" class="logo" />
+    </div>
+    
+    <div class="right">
+      <div class="card">
+        <h1 class="card-title">ChefControl</h1>
+        <p class="card-subtitle">App de control y gestión de restaurantes</p>
+        <div class="menu-group">
+          <button class="btn">Menú</button>
+          <button class="btn">Platos de Temporada</button>
+          <button class="btn">Interior del local</button>
+        </div>
+        <div class="auth-group">
+          <button class="btn login" onclick="showLogin()">Iniciar Sesión</button>
+          <button class="btn register" onclick="showRegister()">Registrarse</button>
+        </div>
+        <div class="social">
+          <i class="fab fa-facebook-f"></i>
+          <i class="fab fa-instagram"></i>
+          <i class="fab fa-twitter"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Login Modal -->
+  <div id="loginModal" class="modal" style="display:none;">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('loginModal')">&times;</span>
+      <h2>Iniciar Sesión</h2>
+      <input type="text" id="loginUser" placeholder="Usuario" class="input">
+      <input type="password" id="loginPass" placeholder="Contraseña" class="input">
+      <button class="btn" onclick="login()">Entrar</button>
+      <div id="loginMsg"></div>
+    </div>
+  </div>
+
+  <!-- Register Modal -->
+  <div id="registerModal" class="modal" style="display:none;">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('registerModal')">&times;</span>
+      <h2>Registrarse</h2>
+      <input type="text" id="regUser" placeholder="Usuario" class="input">
+      <input type="password" id="regPass" placeholder="Contraseña" class="input">
+      <button class="btn" onclick="register()">Registrar</button>
+      <div id="regMsg"></div>
+    </div>
+  </div>
+
+  <script>
+
+    function showLogin() {
+      document.getElementById('loginModal').style.display = 'block';
+    }
+    function showRegister() {
+      document.getElementById('registerModal').style.display = 'block';
+    }
+    function closeModal(id) {
+      document.getElementById(id).style.display = 'none';
+    }
+
+    function login() {
+      const user = document.getElementById('loginUser').value;
+      const pass = document.getElementById('loginPass').value;
+      fetch('http://localhost:3001/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: user, password: pass })
+      })
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('loginMsg').innerText = data.message;
+        if (data.message === 'Login correcto') {
+          window.location.href = 'dashboard.html';
+        }
+      })
+      .catch(() => {
+        document.getElementById('loginMsg').innerText = 'Usuario o contraseña incorrectos';
+      });
+    }
+
+    function register() {
+      const user = document.getElementById('regUser').value;
+      const pass = document.getElementById('regPass').value;
+      fetch('http://localhost:3001/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: user, password: pass })
+      })
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('regMsg').innerText = data.message;
+      })
+      .catch(() => {
+        document.getElementById('regMsg').innerText = 'Error al registrar';
+      });
+    }
+  </script>
+</body>
+</html>
