@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuraciones – ChefControl</title>
+    <link rel="stylesheet" href="../css/configuraciones.css">
+</head>
+
+<body>
+
+    <div class="sidebar">
+        <h2 class="logo">+ChefControl</h2>
+
+        <ul>
+            <li><a href="pedidos.html">📦 Pedidos</a></li>
+            <li><a href="clientes.html">👥 Clientes</a></li>
+            <li><a href="domicilios.html">🚚 Domicilios</a></li>
+            <li class="active"><a href="#">⚙ Configuraciones</a></li>
+        </ul>
+    </div>
+
+    <div class="content">
+
+        <div class="topbar">
+            <input type="text" placeholder="Buscar…">
+            <div class="user">
+                <span>Admin</span>
+                <div class="avatar">A</div>
+            </div>
+        </div>
+
+        <h1 class="title">Configuraciones</h1>
+
+        <div class="settings-container">
+
+            <!-- Perfil -->
+            <div class="card">
+                <h3>Perfil del Administrador</h3>
+
+                <label>Nombre</label>
+                <input type="text" value="Administrador General">
+
+                <label>Correo</label>
+                <input type="email" value="admin@chefcontrol.com">
+
+                <label>Contraseña</label>
+                <input type="password" value="************">
+
+                <button class="btn-guardar">Guardar Cambios</button>
+            </div>
+
+            <!-- Ajustes del sistema -->
+            <div class="card">
+                <h3>Ajustes del Sistema</h3>
+
+                <label>Zona Horaria</label>
+                <select>
+                    <option>GMT-5 (Colombia)</option>
+                    <option>GMT-6</option>
+                    <option>GMT-4</option>
+                </select>
+
+                <label>Modo de Notificaciones</label>
+                <select>
+                    <option>Correo electrónico</option>
+                    <option>SMS</option>
+                    <option>Desactivado</option>
+                </select>
+
+                <label>Idioma</label>
+                <select>
+                    <option>Español</option>
+                    <option>Inglés</option>
+                </select>
+
+                <button class="btn-guardar">Guardar Ajustes</button>
+            </div>
+
+            <!-- Apariencia -->
+            <div class="card">
+                <h3>Apariencia</h3>
+
+                <label>Tema</label>
+                <select>
+                    <option>Claro</option>
+                    <option>Oscuro</option>
+                </select>
+
+                <label>Color Principal</label>
+                <input type="color" value="#5b3df5">
+
+                <button class="btn-guardar">Aplicar Tema</button>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="../js/configuraciones.js"></script>
+</body>
+</html>
