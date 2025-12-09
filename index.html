@@ -21,8 +21,8 @@
         <p class="card-subtitle">App de control y gestión de restaurantes</p>
 
         <div class="menu-group">
-          <button class="btn">Platos de Temporada</button>
-          <button class="btn">Interior del local</button>
+          <button class="btn" onclick="showModal('temporadaModal')">Platos de Temporada</button>
+          <button class="btn" onclick="showModal('interiorModal')">Interior del local</button>
         </div>
 
         <div class="auth-group">
@@ -69,8 +69,31 @@
   </div>
 </div>
 
+<!-- Modal: Platos de Temporada -->
+<div id="temporadaModal" class="modal" style="display:none;">
+  <div class="modal-box">
+    <span class="modal-close" onclick="closeModal('temporadaModal')">&times;</span>
 
+    <h2 class="modal-title">Platos de Temporada</h2>
 
+    <p class="modal-text">Aquí puedes visualizar y gestionar los platos especiales disponibles solo por temporada.</p>
+
+    <button class="modal-btn">Aceptar</button>
+  </div>
+</div>
+
+<!-- Modal: Interior del Local -->
+<div id="interiorModal" class="modal" style="display:none;">
+  <div class="modal-box">
+    <span class="modal-close" onclick="closeModal('interiorModal')">&times;</span>
+
+    <h2 class="modal-title">Interior del Local</h2>
+
+    <p class="modal-text">Accede a configuraciones visuales, fotos del local o información estética del restaurante.</p>
+
+    <button class="modal-btn">Aceptar</button>
+  </div>
+</div>
 
   <script>
 
