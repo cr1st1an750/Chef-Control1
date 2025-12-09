@@ -22,7 +22,7 @@
 
         <div class="menu-group">
 
-          <!-- 🔥 Ahora redirige a la carpeta html -->
+          <!-- Redirige a la carpeta HTML -->
           <button class="btn" onclick="window.location.href='./html/temporada.html'">
             Platos de Temporada
           </button>
@@ -90,43 +90,34 @@
       document.getElementById(id).style.display = 'none';
     }
 
+    /* -----------------------------------------
+       LOGIN FALSO PARA ACCESO A pedidos.html
+       Usuario: admin123
+       Contraseña: admin123
+    -------------------------------------------*/
     function login() {
-      const user = document.getElementById('loginUser').value;
-      const pass = document.getElementById('loginPass').value;
+      const user = document.getElementById('loginUser').value.trim();
+      const pass = document.getElementById('loginPass').value.trim();
+      const msg = document.getElementById('loginMsg');
 
-      fetch('http://localhost:3001/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username: user, password: pass })
-      })
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById('loginMsg').innerText = data.message;
-        if (data.message === 'Login correcto') {
-          window.location.href = 'dashboard.html';
-        }
-      })
-      .catch(() => {
-        document.getElementById('loginMsg').innerText = 'Usuario o contraseña incorrectos';
-      });
+      if (user === "admin123" && pass === "admin123") {
+        msg.style.color = "green";
+        msg.innerText = "Login correcto";
+
+        setTimeout(() => {
+          window.location.href = "./html/pedidos.html";
+        }, 500);
+
+      } else {
+        msg.style.color = "red";
+        msg.innerText = "Usuario o contraseña incorrectos";
+      }
     }
 
+    /* Registro falso simplemente muestra mensaje */
     function register() {
-      const user = document.getElementById('regUser').value;
-      const pass = document.getElementById('regPass').value;
-
-      fetch('http://localhost:3001/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username: user, password: pass })
-      })
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById('regMsg').innerText = data.message;
-      })
-      .catch(() => {
-        document.getElementById('regMsg').innerText = 'Error al registrar';
-      });
+      document.getElementById('regMsg').innerText =
+        "Registro desactivado en esta versión";
     }
 
   </script>
