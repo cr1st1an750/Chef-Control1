@@ -12,7 +12,7 @@
   <div class="container">
 
     <div class="left">
-      <img src="logo.png" alt="ChefControl Logo" class="logo" />
+      <img src="./assets/logo.png" alt="ChefControl Logo" class="logo" />
     </div>
 
     <div class="right">
@@ -21,8 +21,16 @@
         <p class="card-subtitle">App de control y gestión de restaurantes</p>
 
         <div class="menu-group">
-          <button class="btn" onclick="showModal('temporadaModal')">Platos de Temporada</button>
-          <button class="btn" onclick="showModal('interiorModal')">Interior del local</button>
+
+          <!-- 🔥 Ahora redirige a la carpeta html -->
+          <button class="btn" onclick="window.location.href='./html/temporada.html'">
+            Platos de Temporada
+          </button>
+
+          <button class="btn" onclick="window.location.href='./html/interior.html'">
+            Interior del local
+          </button>
+
         </div>
 
         <div class="auth-group">
@@ -39,61 +47,36 @@
     </div>
 
   </div>
+
   <!-- Login Modal -->
-<div id="loginModal" class="modal" style="display:none;">
-  <div class="modal-box">
-    <span class="modal-close" onclick="closeModal('loginModal')">&times;</span>
+  <div id="loginModal" class="modal" style="display:none;">
+    <div class="modal-box">
+      <span class="modal-close" onclick="closeModal('loginModal')">&times;</span>
 
-    <h2 class="modal-title">Iniciar Sesión</h2>
+      <h2 class="modal-title">Iniciar Sesión</h2>
 
-    <input type="text" id="loginUser" placeholder="Usuario" class="modal-input">
-    <input type="password" id="loginPass" placeholder="Contraseña" class="modal-input">
+      <input type="text" id="loginUser" placeholder="Usuario" class="modal-input">
+      <input type="password" id="loginPass" placeholder="Contraseña" class="modal-input">
 
-    <button class="modal-btn" onclick="login()">Entrar</button>
-    <div id="loginMsg" class="modal-msg"></div>
+      <button class="modal-btn" onclick="login()">Entrar</button>
+      <div id="loginMsg" class="modal-msg"></div>
+    </div>
   </div>
-</div>
 
-<!-- Register Modal -->
-<div id="registerModal" class="modal" style="display:none;">
-  <div class="modal-box">
-    <span class="modal-close" onclick="closeModal('registerModal')">&times;</span>
+  <!-- Register Modal -->
+  <div id="registerModal" class="modal" style="display:none;">
+    <div class="modal-box">
+      <span class="modal-close" onclick="closeModal('registerModal')">&times;</span>
 
-    <h2 class="modal-title">Registrarse</h2>
+      <h2 class="modal-title">Registrarse</h2>
 
-    <input type="text" id="regUser" placeholder="Usuario" class="modal-input">
-    <input type="password" id="regPass" placeholder="Contraseña" class="modal-input">
+      <input type="text" id="regUser" placeholder="Usuario" class="modal-input">
+      <input type="password" id="regPass" placeholder="Contraseña" class="modal-input">
 
-    <button class="modal-btn" onclick="register()">Registrar</button>
-    <div id="regMsg" class="modal-msg"></div>
+      <button class="modal-btn" onclick="register()">Registrar</button>
+      <div id="regMsg" class="modal-msg"></div>
+    </div>
   </div>
-</div>
-
-<!-- Modal: Platos de Temporada -->
-<div id="temporadaModal" class="modal" style="display:none;">
-  <div class="modal-box">
-    <span class="modal-close" onclick="closeModal('temporadaModal')">&times;</span>
-
-    <h2 class="modal-title">Platos de Temporada</h2>
-
-    <p class="modal-text">Aquí puedes visualizar y gestionar los platos especiales disponibles solo por temporada.</p>
-
-    <button class="modal-btn">Aceptar</button>
-  </div>
-</div>
-
-<!-- Modal: Interior del Local -->
-<div id="interiorModal" class="modal" style="display:none;">
-  <div class="modal-box">
-    <span class="modal-close" onclick="closeModal('interiorModal')">&times;</span>
-
-    <h2 class="modal-title">Interior del Local</h2>
-
-    <p class="modal-text">Accede a configuraciones visuales, fotos del local o información estética del restaurante.</p>
-
-    <button class="modal-btn">Aceptar</button>
-  </div>
-</div>
 
   <script>
 
@@ -110,6 +93,7 @@
     function login() {
       const user = document.getElementById('loginUser').value;
       const pass = document.getElementById('loginPass').value;
+
       fetch('http://localhost:3001/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -130,6 +114,7 @@
     function register() {
       const user = document.getElementById('regUser').value;
       const pass = document.getElementById('regPass').value;
+
       fetch('http://localhost:3001/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -143,6 +128,7 @@
         document.getElementById('regMsg').innerText = 'Error al registrar';
       });
     }
+
   </script>
 
 </body>

@@ -1,0 +1,109 @@
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-box {
+  width: 650px;
+  background: #ffffff;
+  border-radius: 22px;
+  padding: 28px;
+  position: relative;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.25);
+  max-height: 90vh;
+  overflow-y: auto;
+  border: 2px solid #e8d5ec;
+}
+
+/* Cerrar */
+.modal-close {
+  position: absolute;
+  top: 14px;
+  right: 20px;
+  font-size: 28px;
+  cursor: pointer;
+  color: #7b2cbf;
+  font-weight: bold;
+}
+.modal-close:hover {
+  color: #5a1fa1;
+}
+
+/* Logo + título del local */
+.header-local {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 10px;
+}
+
+.local-logo {
+  width: 65px;
+  height: 65px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 2px solid #7b2cbf;
+}
+
+.local-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: #7b2cbf;
+}
+
+/* Descripción */
+.local-description {
+  font-size: 15px;
+  color: #555;
+  line-height: 1.4;
+  margin-bottom: 20px;
+}
+
+/* Galería */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.gallery-card {
+  background: #f8f0fa;
+  padding: 10px;
+  border-radius: 16px;
+  border: 1px solid #e5c6f5;
+  box-shadow: 0 4px 10px rgba(123, 44, 191, 0.10);
+}
+
+.gallery-img {
+  width: 100%;
+  height: 140px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+/* Botón */
+.modal-btn {
+  width: 100%;
+  margin-top: 30px;
+  background: #7b2cbf;
+  padding: 14px;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.modal-btn:hover {
+  background: #5a1fa1;
+}
