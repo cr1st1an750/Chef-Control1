@@ -10,22 +10,26 @@
 </head>
 <body>
   <div class="container">
+
     <div class="left">
       <img src="logo.png" alt="ChefControl Logo" class="logo" />
     </div>
-    
+
     <div class="right">
       <div class="card">
         <h1 class="card-title">ChefControl</h1>
         <p class="card-subtitle">App de control y gestión de restaurantes</p>
+
         <div class="menu-group">
           <button class="btn">Platos de Temporada</button>
           <button class="btn">Interior del local</button>
         </div>
+
         <div class="auth-group">
           <button class="btn login" onclick="showLogin()">Iniciar Sesión</button>
           <button class="btn register" onclick="showRegister()">Registrarse</button>
         </div>
+
         <div class="social">
           <i class="fab fa-facebook-f"></i>
           <i class="fab fa-instagram"></i>
@@ -33,31 +37,40 @@
         </div>
       </div>
     </div>
-  </div>
 
+  </div>
   <!-- Login Modal -->
-  <div id="loginModal" class="modal" style="display:none;">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('loginModal')">&times;</span>
-      <h2>Iniciar Sesión</h2>
-      <input type="text" id="loginUser" placeholder="Usuario" class="input">
-      <input type="password" id="loginPass" placeholder="Contraseña" class="input">
-      <button class="btn" onclick="login()">Entrar</button>
-      <div id="loginMsg"></div>
-    </div>
-  </div>
+<div id="loginModal" class="modal" style="display:none;">
+  <div class="modal-box">
+    <span class="modal-close" onclick="closeModal('loginModal')">&times;</span>
 
-  <!-- Register Modal -->
-  <div id="registerModal" class="modal" style="display:none;">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('registerModal')">&times;</span>
-      <h2>Registrarse</h2>
-      <input type="text" id="regUser" placeholder="Usuario" class="input">
-      <input type="password" id="regPass" placeholder="Contraseña" class="input">
-      <button class="btn" onclick="register()">Registrar</button>
-      <div id="regMsg"></div>
-    </div>
+    <h2 class="modal-title">Iniciar Sesión</h2>
+
+    <input type="text" id="loginUser" placeholder="Usuario" class="modal-input">
+    <input type="password" id="loginPass" placeholder="Contraseña" class="modal-input">
+
+    <button class="modal-btn" onclick="login()">Entrar</button>
+    <div id="loginMsg" class="modal-msg"></div>
   </div>
+</div>
+
+<!-- Register Modal -->
+<div id="registerModal" class="modal" style="display:none;">
+  <div class="modal-box">
+    <span class="modal-close" onclick="closeModal('registerModal')">&times;</span>
+
+    <h2 class="modal-title">Registrarse</h2>
+
+    <input type="text" id="regUser" placeholder="Usuario" class="modal-input">
+    <input type="password" id="regPass" placeholder="Contraseña" class="modal-input">
+
+    <button class="modal-btn" onclick="register()">Registrar</button>
+    <div id="regMsg" class="modal-msg"></div>
+  </div>
+</div>
+
+
+
 
   <script>
 
@@ -108,5 +121,6 @@
       });
     }
   </script>
+
 </body>
 </html>
